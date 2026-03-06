@@ -1,46 +1,63 @@
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
+![MLflow](https://img.shields.io/badge/MLflow-Experiment%20Tracking-orange)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-red)
+![Docker](https://img.shields.io/badge/Docker-Containerization-blue)
+
 # Housing Price Prediction API
 
 ## Overview
 
-This project demonstrates an end-to-end machine learning workflow for predicting housing prices using a structured dataset. The goal of the project was to build a small but realistic machine learning system where a trained model can be accessed through an API and used to generate predictions based on new input data.
+This project demonstrates an end-to-end machine learning workflow for predicting housing prices using a structured dataset. The goal was to design a simple but realistic ML system where a trained model can be accessed through an API and used to generate predictions based on new input data.
 
-The model is trained on the California Housing dataset and exposed through a FastAPI service. Users can send feature values to the API and receive a predicted housing price in response.
+The model is trained on the California Housing dataset and deployed through a FastAPI service. Users can send housing feature values to the API and receive a predicted housing price as a response.
 
-The project focuses on showing how machine learning models move from training to deployment in a clean and organized way.
+The project focuses on demonstrating how a machine learning model moves from training to deployment in a clean and structured engineering workflow.
 
 ---
 
-## Project Architecture
+## System Architecture
 
-The workflow of the system follows a simple machine learning pipeline:
+The project follows a simple machine learning deployment pipeline.
 
-Data → Preprocessing → Model Training → Model Serialization → API Deployment → Prediction
-
-1. **Data Processing**  
-   The dataset is loaded and prepared using custom preprocessing logic. Numerical and categorical features are handled separately to ensure the model receives properly formatted inputs.
-
-2. **Model Training**  
-   A Random Forest regression model is trained on the processed dataset. The training process includes splitting the data, fitting the model, and evaluating performance.
-
-3. **Experiment Tracking**  
-   MLflow is used during training to log model parameters and evaluation metrics. This allows experiments to be tracked and compared easily.
-
-4. **Model Serialization**  
-   Once the model is trained, the entire pipeline (including preprocessing steps) is saved as a serialized file called `model.pkl`.
-
-5. **Prediction API**  
-   A FastAPI application loads the trained model and exposes an endpoint that allows users to submit input features and receive predicted housing prices.
+```
+        Dataset
+           │
+           ▼
+  Data Processing & Preprocessing
+           │
+           ▼
+       Model Training
+      (Random Forest)
+           │
+           ▼
+      MLflow Tracking
+   (parameters / metrics)
+           │
+           ▼
+      Saved Model File
+        model.pkl
+           │
+           ▼
+        FastAPI API
+         /predict
+           │
+           ▼
+      JSON Prediction
+```
 
 ---
 
 ## Tech Stack
 
-- Python  
-- FastAPI  
-- Scikit-learn  
-- Pandas  
-- MLflow  
-- Docker  
+This project uses the following tools and frameworks:
+
+- **Python**
+- **FastAPI** – API framework for model inference
+- **Scikit-Learn** – machine learning model
+- **Pandas** – data handling
+- **MLflow** – experiment tracking
+- **Docker** – containerization
 
 ---
 
@@ -58,55 +75,100 @@ housing-ml-pipeline
 │   ├── features
 │   ├── models
 │   └── utils
+│       └── logger.py
 │
 ├── data
 │   └── housing.csv
 │
-├── model.pkl
 ├── Dockerfile
 ├── requirements.txt
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## Running the Project Locally
+# Running the Project Locally
 
-Clone the repository:
+Follow the steps below to run the project on your machine.
+
+---
+
+## 1. Clone the Repository
 
 ```
-git clone https://github.com/yourusername/housing-ml-pipeline.git
+git clone https://github.com/dineshkvs1304/housing-ml-pipeline.git
 ```
 
-Move into the project folder:
+Move into the project directory.
 
 ```
 cd housing-ml-pipeline
 ```
 
-Install the required dependencies:
+---
+
+## 2. Create a Virtual Environment
+
+Creating a virtual environment keeps project dependencies isolated.
+
+### Windows
+
+```
+python -m venv venv
+venv\Scripts\activate
+```
+
+### Linux / Mac
+
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+---
+
+## 3. Install Required Dependencies
+
+Install all required libraries from the requirements file.
 
 ```
 pip install -r requirements.txt
 ```
 
-Start the FastAPI server:
+---
+
+## 4. Start the FastAPI Server
+
+Run the API using Uvicorn.
 
 ```
 uvicorn api.inference_api:app --reload
 ```
 
-Open the API documentation in your browser:
+You should see something similar to:
+
+```
+Uvicorn running on http://127.0.0.1:8000
+```
+
+---
+
+## 5. Open API Documentation
+
+FastAPI automatically generates interactive API documentation.
+
+Open this in your browser:
 
 ```
 http://127.0.0.1:8000/docs
 ```
 
-This page provides an interactive interface where you can test the prediction endpoint.
+From here you can test the prediction endpoint directly.
 
 ---
 
-## Example Prediction Request
+# Example Prediction Request
 
 Endpoint:
 
@@ -114,7 +176,7 @@ Endpoint:
 POST /predict
 ```
 
-Request body:
+Example JSON input:
 
 ```json
 {
@@ -130,7 +192,7 @@ Request body:
 }
 ```
 
-Example response:
+Example API response:
 
 ```json
 {
@@ -140,9 +202,9 @@ Example response:
 
 ---
 
-## Health Check Endpoint
+# Health Check Endpoint
 
-The API includes a simple endpoint to verify that the service is running.
+A simple health check endpoint is included to verify that the API is running.
 
 ```
 GET /health
@@ -152,24 +214,24 @@ Response:
 
 ```
 {
-  "status": "API is running"
+ "status": "API is running"
 }
 ```
 
 ---
 
-## Future Improvements
+# Future Improvements
 
 Some possible improvements for extending this project include:
 
 - Model versioning using MLflow Model Registry  
 - Automated training pipelines  
 - CI/CD integration  
-- Container orchestration using Kubernetes  
-- Monitoring and logging integration  
+- Deployment on cloud platforms  
+- Model monitoring and logging improvements  
 
 ---
 
-## Author
+# Author
 
 Kandyana Venkata Sai Dinesh
