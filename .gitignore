@@ -3,6 +3,8 @@ __pycache__/
 *.pyo
 *.pyd
 
+model.pkl
+model/
 mlruns/
 mlflow.db
 
